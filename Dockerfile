@@ -32,5 +32,5 @@ VOLUME ["/data"]
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 22003
+EXPOSE 22000
 CMD ["./Server"]
