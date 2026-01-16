@@ -3,3 +3,4 @@
 .gitignore
 
 data/
+compose.yaml

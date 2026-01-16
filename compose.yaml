@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: example_root_password
+      MYSQL_DATABASE: gtac_db
+      MYSQL_USER: gtac_user
+      MYSQL_PASSWORD: example_user_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  gtac:
+    image: ghcr.io/markosyiakoumis/gtac-docker:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    ports:
+      - "22003:22003/udp"
+      - "22003:22003/tcp"
+    volumes:
+      - ./data:/data
