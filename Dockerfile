@@ -3,6 +3,8 @@ FROM debian:13-slim
 LABEL org.opencontainers.image.title="Grand Theft Auto: Connected"
 LABEL org.opencontainers.image.description="Docker image for Grand Theft Auto: Connected"
 
+LABEL org.opencontainers.image.source="https://github.com/markosyiakoumis/gtac-docker"
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && \
